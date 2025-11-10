@@ -285,6 +285,14 @@ export default function App() {
   const b_SLOPE = -0.8214285714285716;
   const REFERENCE_THICKNESS = 6; // mm
 
+  // Track current URL for quick reference in the UI
+  const [appUrl, setAppUrl] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setAppUrl(window.location.href);
+    }
+  }, []);
+
   // Color selection
   const [selectedColor, setSelectedColor] = useState("blue");
   const currentPreset = COLOR_PRESETS[selectedColor];
@@ -408,6 +416,11 @@ export default function App() {
             <div style={{ width: 120, height: 40, background: "#e5e7eb", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", color: "#6b7280", fontWeight: 700 }}>Logo</div>
             <h1 style={{ fontSize: 20, fontWeight: 800 }}>Obeikan Color Ellipse Calculator</h1>
           </div>
+          {appUrl && (
+            <div style={{ fontSize: 12, color: "#4b5563" }}>
+              Current URL: <span style={{ fontWeight: 600 }}>{appUrl}</span>
+            </div>
+          )}
         </div>
       </header>
 
